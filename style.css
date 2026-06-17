@@ -145,6 +145,11 @@ input[type]:checked ~ span.mid {
 }
 
 /* Background video — fills entire hero */
+.hero-wrapper {
+  position: relative;
+  overflow: hidden; /* clips the bleed from blur edges */
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -153,6 +158,9 @@ input[type]:checked ~ span.mid {
   object-fit: cover;
   object-position: center;
   z-index: 0;
+
+  filter: blur(2.5px);          /* adjust value to taste */
+  transform: scale(1.05);     /* prevents blurry edges from showing */
 }
 
 /* Dark gradient overlay — bottom-left darker so text reads clearly */
@@ -223,6 +231,7 @@ input[type]:checked ~ span.mid {
 }
 
 .slide-title {
+  font-family: 'Inter', sans-serif; /* swap name here */
   font-size: clamp(2.4rem, 5vw, 4.5rem);
   font-weight: 900;
   color: #fff;
@@ -233,7 +242,7 @@ input[type]:checked ~ span.mid {
 }
 
 .slide-title .white  { color: #ffffff; }
-.slide-title .orange { color: #fa8c32; }
+.slide-title .orange { color: #ff780a; }
 .slide-tags {
   display: flex;
   align-items: center;
@@ -312,13 +321,13 @@ input[type]:checked ~ span.mid {
 }
 
 .stat-number .orange {
-  color: #fa8c32;
+  color: #ff7606;
 }
 
 .stat-label {
   font-size: clamp(0.85rem, 1.2vw, 1rem);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1.3;
