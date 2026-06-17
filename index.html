@@ -5,11 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>oppty tech hub</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
 </head>
 <body>
+
+  <!-- ========== CURTAIN ANIMATION ========== -->
+  <div class="curtain" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+  </div>
+  <div class="curtain-logo" id="curtainLogo">
+    <img src="images/oppty.png" alt="Oppty Logo" />
+  </div>
 
   <!-- ========== NAVBAR ========== -->
   <header class="navbar">
@@ -57,7 +65,7 @@
       <div class="menu-right">
         <div class="menu-section">
           <p class="menu-label">GET STARTED</p>
-          <a href="#" class="menu-demo-btn">Request a Demo <i class="fas fa-arrow-up-right-from-square"></i></a>
+          <a href="#" class="menu-demo-btn">Services <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
         <div class="menu-section mt-auto">
           <p class="menu-label">LATEST POST</p>
@@ -71,8 +79,8 @@
     </div>
 
     <div class="menu-footer-btns">
-      <a href="#" class="btn-buy">Buy Template</a>
-      <a href="#" class="btn-framer-sm"><i class="fas fa-cube"></i> Made in Framer</a>
+      <a href="#" class="btn-buy">Button 2</a>
+      <a href="#" class="btn-framer-sm"><i class="fas fa-cube"></i> Button 3</a>
     </div>
 
   </nav>
@@ -86,12 +94,14 @@
 
     <div class="hero-overlay"></div>
 
-    <!-- Text slider -->
+    <!-- LEFT: Text slider -->
     <div class="hero-slider">
       <div class="slider-track" id="sliderTrack">
 
         <div class="slide">
-          <h2 class="slide-title"><span class="white">INNOVATIVE</span> <span class="orange">SOLUTIONS</span> <span class="white">UNLEASHED</span></h2>
+          <h2 class="slide-title">
+            <span class="white">INNOVATIVE</span> <span class="orange">SOLUTIONS</span> <span class="white">UNLEASHED</span>
+          </h2>
           <div class="slide-tags">
             <span>ADVANCED IT</span>
             <span class="dot-sep">●</span>
@@ -102,7 +112,9 @@
         </div>
 
         <div class="slide">
-          <h2 class="slide-title"><span class="orange">FUTURE-READY</span> <span class="white">TECHNOLOGY</span></h2>
+          <h2 class="slide-title">
+            <span class="orange">FUTURE-READY</span> <span class="white">TECHNOLOGY</span>
+          </h2>
           <div class="slide-tags">
             <span>AI AUTOMATION</span>
             <span class="dot-sep">●</span>
@@ -113,7 +125,9 @@
         </div>
 
         <div class="slide">
-          <h2 class="slide-title"><span class="white">ELEVATE</span> <span class="orange">ONLINE</span> <span class="white">PRESENCE</span></h2>
+          <h2 class="slide-title">
+            <span class="white">ELEVATE</span> <span class="orange">ONLINE</span> <span class="white">PRESENCE</span>
+          </h2>
           <div class="slide-tags">
             <span>STUNNING WEBSITES</span>
             <span class="dot-sep">●</span>
@@ -126,7 +140,19 @@
       </div>
     </div>
 
-    <!-- Stats slider (right side) -->
+    <!-- CENTER: Rotary Dialer -->
+    <div class="dialer-wrap" id="dialerWrap">
+      <div class="dialer-arrow"></div>
+      <div class="dialer-ring-outer">
+        <div class="dialer-outer-ring"></div>
+        <div class="dialer-ring" id="dialerRing">
+          <!-- tick marks & icons injected by JS -->
+        </div>
+      </div>
+      <div class="dialer-dots" id="dialerDots"></div>
+    </div>
+
+    <!-- RIGHT: Stats slider -->
     <div class="stats-slider">
       <div class="stats-track" id="statsTrack">
 
@@ -164,18 +190,38 @@
 
     <!-- Bottom right buttons -->
     <div class="hero-actions">
-      <a href="#" class="btn-demo">Request a Demo <i class="fas fa-arrow-up-right-from-square"></i></a>
-      <a href="#" class="btn-framer"><i class="fas fa-cube"></i> Made in Framer</a>
+      <a href="#" class="btn-demo">Services <i class="fas fa-arrow-up-right-from-square"></i></a>
+      <a href="#" class="btn-framer"><i class="fas fa-cube"></i>Button 1</a>
     </div>
 
   </section>
 
   <script>
-    // ---- Hamburger menu ----
-    const toggle   = document.getElementById('menuToggle');
-    const closeBtn = document.getElementById('menuClose');
-    const menu     = document.getElementById('slideMenu');
-    const overlay  = document.getElementById('menuOverlay');
+    /* ================================================
+       CURTAIN PAGE LOAD ANIMATION
+    ================================================ */
+    window.addEventListener('load', () => {
+      const curtain     = document.getElementById('curtain');
+      const curtainLogo = document.getElementById('curtainLogo');
+
+      setTimeout(() => {
+        curtainLogo.classList.add('hide');   // fade out logo
+        curtain.classList.add('open');       // split panels apart
+
+        setTimeout(() => {
+          curtain.remove();
+          curtainLogo.remove();
+        }, 1000);
+      }, 1400); // how long curtain stays — adjust to taste
+    });
+
+    /* ================================================
+       HAMBURGER MENU
+    ================================================ */
+    const toggle    = document.getElementById('menuToggle');
+    const closeBtn  = document.getElementById('menuClose');
+    const menu      = document.getElementById('slideMenu');
+    const overlay   = document.getElementById('menuOverlay');
     const menuCheck = document.getElementById('menuCheck');
 
     function openMenu() {
@@ -189,6 +235,7 @@
       document.body.style.overflow = '';
       menuCheck.checked = false;
     }
+
     toggle.addEventListener('change', (e) => {
       if (e.target.tagName === 'INPUT') {
         menuCheck.checked ? openMenu() : closeMenu();
@@ -197,67 +244,214 @@
     closeBtn.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
 
-    // ---- Hero text slider ----
-    const slides = document.querySelectorAll('.slide');
-    let current = 0;
-    let animating = false;
+    /* ================================================
+       ROTARY DIALER + SLIDER SYNC
+    ================================================ */
 
-    slides[0].classList.add('active');
+    // Slide data — icon per slide (Font Awesome class)
+    const SLIDE_DATA = [
+      { icon: 'fas fa-microchip' },   // Innovative Solutions
+      { icon: 'fas fa-robot'      },  // Future-Ready Technology
+      { icon: 'fas fa-globe'      },  // Elevate Online Presence
+    ];
 
-    function goTo(next) {
-      if (animating) return;
-      animating = true;
-      const curr = current;
-      current = (next + slides.length) % slides.length;
+    const TOTAL        = SLIDE_DATA.length;
+    const DEG_PER_STEP = 360 / TOTAL;   // 120°
+    const RING_SIZE    = 230;            // px — matches CSS
+    const ICON_RADIUS  = 86;            // px from center
+    const INTERVAL_MS  = 3500;
 
-      slides[current].style.transition = 'none';
-      slides[current].classList.add('enter-from-left');
-      slides[current].offsetHeight;
+    let current     = 0;
+    let rotationDeg = 0;
+    let animating   = false;
 
-      slides[current].style.transition = '';
-      slides[curr].classList.add('exit-to-right');
-      slides[curr].classList.remove('active');
-      slides[current].classList.remove('enter-from-left');
-      slides[current].classList.add('active');
-
-      setTimeout(() => {
-        slides[curr].classList.remove('exit-to-right');
-        animating = false;
-      }, 750);
+    // ── Build tick marks ──
+    const dialerRing = document.getElementById('dialerRing');
+    for (let t = 0; t < 12; t++) {
+      const tick = document.createElement('div');
+      tick.className = 'dial-tick';
+      tick.style.transform = `rotate(${t * 30}deg) translateX(-50%)`;
+      dialerRing.appendChild(tick);
     }
 
-    setInterval(() => goTo(current + 1), 3500);
+    // ── Build icon slots ──
+    const iconEls = SLIDE_DATA.map((data, i) => {
+      // Start icon[0] at top (−90°), rest evenly spaced
+      const angleDeg = (i * DEG_PER_STEP) - 90;
+      const angleRad = (angleDeg * Math.PI) / 180;
+      const cx = RING_SIZE / 2 + ICON_RADIUS * Math.cos(angleRad) - 23; // 23 = half icon size
+      const cy = RING_SIZE / 2 + ICON_RADIUS * Math.sin(angleRad) - 23;
 
-    // ---- Stats slider (right side) ----
+      const el = document.createElement('div');
+      el.className = 'dial-icon' + (i === 0 ? ' active-icon' : '');
+      el.style.left = cx + 'px';
+      el.style.top  = cy + 'px';
+
+      const ico = document.createElement('i');
+      ico.className = data.icon;
+      el.appendChild(ico);
+      dialerRing.appendChild(el);
+      return el;
+    });
+
+    // ── Build indicator dots ──
+    const dotsWrap = document.getElementById('dialerDots');
+    const dots = SLIDE_DATA.map((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dialer-dot' + (i === 0 ? ' active' : '');
+      dotsWrap.appendChild(d);
+      return d;
+    });
+
+    // ── Slider elements ──
+    const textSlides = document.querySelectorAll('.slide');
     const statSlides = document.querySelectorAll('.stat-slide');
-    let statCurrent = 0;
-    let statAnimating = false;
-
+    textSlides[0].classList.add('active');
     statSlides[0].classList.add('active');
 
-    function statGoTo(next) {
-      if (statAnimating) return;
-      statAnimating = true;
-      const curr = statCurrent;
-      statCurrent = (next + statSlides.length) % statSlides.length;
+    // ── Go-to function ──
+    function goTo(index) {
+      if (animating) return;
+      animating = true;
 
-      statSlides[statCurrent].style.transition = 'none';
-      statSlides[statCurrent].classList.add('enter-from-left');
-      statSlides[statCurrent].offsetHeight;
+      const prev = current;
+      current = ((index % TOTAL) + TOTAL) % TOTAL;
 
-      statSlides[statCurrent].style.transition = '';
-      statSlides[curr].classList.add('exit-to-right');
-      statSlides[curr].classList.remove('active');
-      statSlides[statCurrent].classList.remove('enter-from-left');
-      statSlides[statCurrent].classList.add('active');
+      rotationDeg = current * DEG_PER_STEP;
+      dialerRing.style.transform = `rotate(${rotationDeg}deg)`;
+
+      iconEls.forEach((el) => {
+        el.classList.remove('active-icon');
+        el.style.transform = `rotate(${-rotationDeg}deg)`;
+      });
+      iconEls[current].classList.add('active-icon');
+
+      // Swap text slides
+      textSlides[current].style.transition = 'none';
+      textSlides[current].classList.add('enter-from-left');
+      textSlides[current].offsetHeight;
+      textSlides[current].style.transition = '';
+      textSlides[prev].classList.add('exit-to-right');
+      textSlides[prev].classList.remove('active');
+      textSlides[current].classList.remove('enter-from-left');
+      textSlides[current].classList.add('active');
+
+      // Swap stat slides
+      const statNext = current % statSlides.length;
+      const statPrev = prev % statSlides.length;
+      if (statNext !== statPrev) {
+        statSlides[statNext].style.transition = 'none';
+        statSlides[statNext].classList.add('enter-from-left');
+        statSlides[statNext].offsetHeight;
+        statSlides[statNext].style.transition = '';
+        statSlides[statPrev].classList.add('exit-to-right');
+        statSlides[statPrev].classList.remove('active');
+        statSlides[statNext].classList.remove('enter-from-left');
+        statSlides[statNext].classList.add('active');
+      }
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
 
       setTimeout(() => {
-        statSlides[curr].classList.remove('exit-to-right');
-        statAnimating = false;
-      }, 750);
+        textSlides[prev].classList.remove('exit-to-right');
+        if (statNext !== statPrev) statSlides[statPrev].classList.remove('exit-to-right');
+        animating = false;
+      }, 800);
     }
 
-    setInterval(() => statGoTo(statCurrent + 1), 3500);
+    // ── Drag to rotate ──
+    let isDragging   = false;
+    let dragStartAngle = 0;
+    let dragStartRot   = 0;
+
+    function getAngle(e, el) {
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width  / 2;
+      const cy = rect.top  + rect.height / 2;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
+    }
+
+    function onDragStart(e) {
+      isDragging     = true;
+      dragStartAngle = getAngle(e, dialerRing);
+      dragStartRot   = rotationDeg;
+      dialerRing.style.transition = 'none'; // disable smooth during drag
+      clearInterval(autoTimer);
+      e.preventDefault();
+    }
+
+    function onDragMove(e) {
+      if (!isDragging) return;
+      const angle = getAngle(e, dialerRing);
+      const delta = angle - dragStartAngle;
+      const newRot = dragStartRot + delta;
+
+      // Live rotate ring visually
+      dialerRing.style.transform = `rotate(${newRot}deg)`;
+
+      // Keep icons upright during drag
+      iconEls.forEach(el => {
+        el.style.transform = `rotate(${-newRot}deg)`;
+      });
+
+      e.preventDefault();
+    }
+
+    function onDragEnd(e) {
+      if (!isDragging) return;
+      isDragging = false;
+
+      // Re-enable smooth transition
+      dialerRing.style.transition = 'transform 0.85s cubic-bezier(0.77, 0, 0.18, 1)';
+
+      // Snap to nearest slide
+      const currentVisualRot = parseFloat(
+        dialerRing.style.transform.replace('rotate(', '').replace('deg)', '') || 0
+      );
+      const nearest = Math.round(currentVisualRot / DEG_PER_STEP);
+      rotationDeg = nearest * DEG_PER_STEP;
+
+      const snapIndex = ((nearest % TOTAL) + TOTAL) % TOTAL;
+
+      if (snapIndex !== current) {
+        goTo(snapIndex);
+      } else {
+        // Snap back to current if no change
+        dialerRing.style.transform = `rotate(${rotationDeg}deg)`;
+        iconEls.forEach(el => {
+          el.style.transform = `rotate(${-rotationDeg}deg)`;
+        });
+      }
+
+      // Restart auto after drag
+      autoTimer = setInterval(() => goTo(current + 1), INTERVAL_MS);
+    }
+
+    // Mouse events
+    dialerRing.addEventListener('mousedown',  onDragStart);
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup',   onDragEnd);
+
+    // Touch events (mobile)
+    dialerRing.addEventListener('touchstart', onDragStart, { passive: false });
+    window.addEventListener('touchmove',  onDragMove,  { passive: false });
+    window.addEventListener('touchend',   onDragEnd);
+
+    // ── Dot clicks still work ──
+    dots.forEach((d, i) => {
+      d.addEventListener('click', () => {
+        if (i !== current) {
+          clearInterval(autoTimer);
+          goTo(i);
+          autoTimer = setInterval(() => goTo(current + 1), INTERVAL_MS);
+        }
+      });
+    });
+
+    // ── Auto-rotate ──
+    let autoTimer = setInterval(() => goTo(current + 1), INTERVAL_MS);
   </script>
 
 </body>
