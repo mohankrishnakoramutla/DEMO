@@ -20,7 +20,7 @@ body {
 }
 
 /* ==========================================
-   NAVBAR
+   NAVBAR — GLASSY
    ========================================== */
 .navbar {
   position: fixed;
@@ -31,25 +31,25 @@ body {
   max-width: 1200px;
   z-index: 100;
   height: 62px;
-  background: rgba(18, 10, 4, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(250, 140, 50, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4),
-              inset 0 1px 0 rgba(255,255,255,0.06);
-  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
 .navbar:hover {
-  background: rgba(18, 10, 4, 0.78);
-  box-shadow: 0 12px 48px rgba(0,0,0,0.5),
-              0 0 24px rgba(250,140,50,0.08),
-              inset 0 1px 0 rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 /* Logo */
@@ -227,6 +227,75 @@ body {
 }
 
 /* ==========================================
+   RIGHT STATS SLIDER
+   ========================================== */
+.stats-slider {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: 5%;
+  left: 55%;
+  transform: translateY(-50%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.stats-track {
+  position: relative;
+  width: 100%;
+  height: 140px;
+}
+
+.stat-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateX(-110%);
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1),
+              opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.stat-slide.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.stat-slide.enter-from-left {
+  transform: translateX(-110%);
+  opacity: 0;
+}
+
+.stat-slide.exit-to-right {
+  transform: translateX(110%);
+  opacity: 0;
+}
+
+.stat-number {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 12px;
+}
+
+.stat-number .orange {
+  color: #fa8c32;
+}
+
+.stat-label {
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.3;
+}
+
+/* ==========================================
    RIGHT SOCIAL ICONS
    ========================================== */
 .social-icons {
@@ -243,7 +312,7 @@ body {
 
 .social-icons a {
   color: rgba(255, 255, 255, 0.75);
-  font-size: 0.9rem;
+  font-size: 1.25rem;
   text-decoration: none;
   transition: color 0.3s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1;
@@ -321,6 +390,10 @@ body {
    RESPONSIVE
    ========================================== */
 @media (max-width: 700px) {
+  .navbar {
+    width: calc(100% - 32px);
+  }
+
   .hero-slider {
     padding: 20px 24px 18px;
   }
@@ -339,6 +412,7 @@ body {
   }
 
   .social-icons { display: none; }
+  .stats-slider { display: none; }
 }
 
 /* ==========================================

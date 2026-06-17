@@ -123,6 +123,33 @@
       </div>
     </div>
 
+    <!-- Stats slider (right side) -->
+    <div class="stats-slider">
+      <div class="stats-track" id="statsTrack">
+
+        <div class="stat-slide">
+          <p class="stat-number"><span class="orange">2K</span></p>
+          <p class="stat-label">Projects Completed</p>
+        </div>
+
+        <div class="stat-slide">
+          <p class="stat-number"><span class="orange">200K</span></p>
+          <p class="stat-label">Happy Customers</p>
+        </div>
+
+        <div class="stat-slide">
+          <p class="stat-number"><span class="orange">10+</span></p>
+          <p class="stat-label">Awards Achieved</p>
+        </div>
+
+        <div class="stat-slide">
+          <p class="stat-number"><span class="orange">5+</span></p>
+          <p class="stat-label">Global Branches</p>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Social icons -->
     <div class="social-icons">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -191,6 +218,37 @@
     }
 
     setInterval(() => goTo(current + 1), 3500);
+
+    // ---- Stats slider (right side) ----
+    const statSlides = document.querySelectorAll('.stat-slide');
+    let statCurrent = 0;
+    let statAnimating = false;
+
+    statSlides[0].classList.add('active');
+
+    function statGoTo(next) {
+      if (statAnimating) return;
+      statAnimating = true;
+      const curr = statCurrent;
+      statCurrent = (next + statSlides.length) % statSlides.length;
+
+      statSlides[statCurrent].style.transition = 'none';
+      statSlides[statCurrent].classList.add('enter-from-left');
+      statSlides[statCurrent].offsetHeight;
+
+      statSlides[statCurrent].style.transition = '';
+      statSlides[curr].classList.add('exit-to-right');
+      statSlides[curr].classList.remove('active');
+      statSlides[statCurrent].classList.remove('enter-from-left');
+      statSlides[statCurrent].classList.add('active');
+
+      setTimeout(() => {
+        statSlides[curr].classList.remove('exit-to-right');
+        statAnimating = false;
+      }, 750);
+    }
+
+    setInterval(() => statGoTo(statCurrent + 1), 3500);
   </script>
 
 </body>
