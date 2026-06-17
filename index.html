@@ -15,10 +15,12 @@
     <a href="#" class="logo">
       <img src="images/oppty.png" alt="Oppty Logo" class="logo-img" />
     </a>
-    <button class="hamburger" id="menuToggle" aria-label="Open menu">
-      <span></span>
-      <span></span>
-    </button>
+    <label for="menuCheck" class="menuButton" id="menuToggle" aria-label="Open menu">
+      <input id="menuCheck" type="checkbox" />
+      <span class="top"></span>
+      <span class="mid"></span>
+      <span class="bot"></span>
+    </label>
   </header>
 
   <!-- ========== SLIDE-IN MENU ========== -->
@@ -173,6 +175,7 @@
     const closeBtn = document.getElementById('menuClose');
     const menu     = document.getElementById('slideMenu');
     const overlay  = document.getElementById('menuOverlay');
+    const menuCheck = document.getElementById('menuCheck');
 
     function openMenu() {
       menu.classList.add('open');
@@ -183,8 +186,13 @@
       menu.classList.remove('open');
       overlay.classList.remove('show');
       document.body.style.overflow = '';
+      menuCheck.checked = false;
     }
-    toggle.addEventListener('click', openMenu);
+    toggle.addEventListener('change', (e) => {
+      if (e.target.tagName === 'INPUT') {
+        menuCheck.checked ? openMenu() : closeMenu();
+      }
+    });
     closeBtn.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
 
