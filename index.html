@@ -10,6 +10,9 @@
 </head>
 <body>
 
+  <!-- Custom orange cursor dot -->
+  <div class="cursor-dot" id="cursorDot"></div>
+
   <!-- ========== NAVBAR ========== -->
   <header class="navbar">
     <a href="#" class="logo">
@@ -25,7 +28,6 @@
   <div class="menu-overlay" id="menuOverlay"></div>
   <nav class="slide-menu" id="slideMenu">
 
-    <!-- Close button (replaces hamburger lines with X) -->
     <button class="menu-close" id="menuClose" aria-label="Close menu">
       <span></span>
       <span></span>
@@ -33,7 +35,6 @@
 
     <div class="menu-body">
 
-      <!-- LEFT: Navigation -->
       <div class="menu-left">
         <p class="menu-label">NAVIGATION</p>
         <ul class="menu-links">
@@ -44,7 +45,6 @@
           <li><a href="#">Insights</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
-        <!-- Social icons bottom-left -->
         <div class="menu-socials">
           <a href="#"><i class="fab fa-linkedin-in"></i></a>
           <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -54,14 +54,11 @@
         </div>
       </div>
 
-      <!-- RIGHT: Get Started + Latest Post -->
       <div class="menu-right">
-
         <div class="menu-section">
           <p class="menu-label">GET STARTED</p>
           <a href="#" class="menu-demo-btn">Request a Demo <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
-
         <div class="menu-section mt-auto">
           <p class="menu-label">LATEST POST</p>
           <div class="menu-post">
@@ -69,12 +66,10 @@
             <p class="post-caption">Cracking the Genetic Code for Optimal Health</p>
           </div>
         </div>
-
       </div>
 
     </div>
 
-    <!-- Bottom-right buttons inside menu -->
     <div class="menu-footer-btns">
       <a href="#" class="btn-buy">Buy Template</a>
       <a href="#" class="btn-framer-sm"><i class="fas fa-cube"></i> Made in Framer</a>
@@ -85,20 +80,18 @@
   <!-- ========== HERO ========== -->
   <section class="hero">
 
-    <!-- Background video -->
     <video class="hero-bg" autoplay muted loop playsinline>
       <source src="images/hero2.mp4" type="video/mp4" />
     </video>
 
-    <!-- subtle dark overlay bottom-left so text is readable -->
     <div class="hero-overlay"></div>
 
-    <!-- Bottom text slider -->
+    <!-- Text slider -->
     <div class="hero-slider">
       <div class="slider-track" id="sliderTrack">
 
         <div class="slide">
-          <h2 class="slide-title">INNOVATIVE SOLUTIONS UNLEASHED</h2>
+          <h2 class="slide-title"><span class="white">INNOVATIVE</span> <span class="orange">SOLUTIONS</span> <span class="white">UNLEASHED</span></h2>
           <div class="slide-tags">
             <span>ADVANCED IT</span>
             <span class="dot-sep">●</span>
@@ -109,7 +102,7 @@
         </div>
 
         <div class="slide">
-          <h2 class="slide-title">FUTURE-READY TECHNOLOGY</h2>
+          <h2 class="slide-title"><span class="orange">FUTURE-READY</span> <span class="white">TECHNOLOGY</span></h2>
           <div class="slide-tags">
             <span>AI AUTOMATION</span>
             <span class="dot-sep">●</span>
@@ -120,7 +113,7 @@
         </div>
 
         <div class="slide">
-          <h2 class="slide-title">ELEVATE ONLINE PRESENCE</h2>
+          <h2 class="slide-title"><span class="white">ELEVATE</span> <span class="orange">ONLINE</span> <span class="white">PRESENCE</span></h2>
           <div class="slide-tags">
             <span>STUNNING WEBSITES</span>
             <span class="dot-sep">●</span>
@@ -133,7 +126,7 @@
       </div>
     </div>
 
-    <!-- Right side social icons -->
+    <!-- Social icons -->
     <div class="social-icons">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
       <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -142,7 +135,7 @@
       <a href="#"><i class="fab fa-facebook"></i></a>
     </div>
 
-    <!-- Bottom right action buttons -->
+    <!-- Bottom right buttons -->
     <div class="hero-actions">
       <a href="#" class="btn-demo">Request a Demo <i class="fas fa-arrow-up-right-from-square"></i></a>
       <a href="#" class="btn-framer"><i class="fas fa-cube"></i> Made in Framer</a>
@@ -151,6 +144,18 @@
   </section>
 
   <script>
+    // ---- Custom cursor dot ----
+    const dot = document.getElementById('cursorDot');
+    document.addEventListener('mousemove', (e) => {
+      dot.style.left = e.clientX + 'px';
+      dot.style.top  = e.clientY + 'px';
+    });
+    // Scale up on clickable elements
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => dot.classList.add('cursor-grow'));
+      el.addEventListener('mouseleave', () => dot.classList.remove('cursor-grow'));
+    });
+
     // ---- Hamburger menu ----
     const toggle   = document.getElementById('menuToggle');
     const closeBtn = document.getElementById('menuClose');
@@ -162,38 +167,32 @@
       overlay.classList.add('show');
       document.body.style.overflow = 'hidden';
     }
-
     function closeMenu() {
       menu.classList.remove('open');
       overlay.classList.remove('show');
       document.body.style.overflow = '';
     }
-
     toggle.addEventListener('click', openMenu);
     closeBtn.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
 
-    // ---- Hero text slider — slide in from left, exit to right ----
+    // ---- Hero text slider ----
     const slides = document.querySelectorAll('.slide');
     let current = 0;
     let animating = false;
 
-    // set first slide as visible
     slides[0].classList.add('active');
 
     function goTo(next) {
       if (animating) return;
       animating = true;
-
       const curr = current;
       current = (next + slides.length) % slides.length;
 
-      // position incoming slide off-screen left instantly (no transition)
       slides[current].style.transition = 'none';
       slides[current].classList.add('enter-from-left');
-      slides[current].offsetHeight; // force reflow
+      slides[current].offsetHeight;
 
-      // re-enable transition then animate both
       slides[current].style.transition = '';
       slides[curr].classList.add('exit-to-right');
       slides[curr].classList.remove('active');
