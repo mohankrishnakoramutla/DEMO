@@ -10,9 +10,6 @@
 </head>
 <body>
 
-  <!-- Custom orange cursor dot -->
-  <div class="cursor-dot" id="cursorDot"></div>
-
   <!-- ========== NAVBAR ========== -->
   <header class="navbar">
     <a href="#" class="logo">
@@ -144,18 +141,6 @@
   </section>
 
   <script>
-    // ---- Custom cursor dot ----
-    const dot = document.getElementById('cursorDot');
-    document.addEventListener('mousemove', (e) => {
-      dot.style.left = e.clientX + 'px';
-      dot.style.top  = e.clientY + 'px';
-    });
-    // Scale up on clickable elements
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => dot.classList.add('cursor-grow'));
-      el.addEventListener('mouseleave', () => dot.classList.remove('cursor-grow'));
-    });
-
     // ---- Hamburger menu ----
     const toggle   = document.getElementById('menuToggle');
     const closeBtn = document.getElementById('menuClose');
